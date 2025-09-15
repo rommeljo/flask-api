@@ -13,13 +13,14 @@ from datetime import datetime
 from datetime import timedelta
 from functools import wraps
 
-
-
+#CREATE USER myduka_user WITH PASSWORD 'johnrommel';
+#GRANT CONNECT ON DATABASE myduka_api TO myduka_user;
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://myduka_user:johnrommel@172.17.0.1:5432/shop'
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:johnrommel@localhost/shop'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://myduka_user:johnrommel@172.17.0.1//shop'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"]="1234gh"
 
@@ -305,4 +306,4 @@ if __name__ == "__main__":
 
 
 #docker run -v C:/flask_project:/app/database/database.db -p 127.0.0.1:5000:80 -d -t flask_project
-#docker run -v /home/flask-api/app/database:/app/database/database.db -p 127.0.0.1:5000:80 -d -t flask_project
+#docker run -v /home/volume-database/flask-api/app:/app/database/database.db -p 5000:80  -d -t flask-api
