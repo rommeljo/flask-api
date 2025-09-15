@@ -17,7 +17,9 @@ from functools import wraps
 
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:johnrommel@localhost/shop'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
+
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:johnrommel@localhost/shop'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"]="1234gh"
 
@@ -297,3 +299,10 @@ def mpesa_callback():
     
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+#docker run -v C:/flask_project:/app/database/database.db -p 127.0.0.1:5000:80 -d -t flask_project
+#docker run -v /home/flask-api/app/database:/app/database/database.db -p 127.0.0.1:5000:80 -d -t flask_project
